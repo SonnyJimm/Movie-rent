@@ -37,21 +37,30 @@ Route::get("/product/all",function(){
   return $products;
 });
 
-  Route::get("/product/add",function(Request $request){
-  Product::create([
-    "name"=>$request->name,
-    "author"=>$request->author,
-    'producer'=>$request->producer,
-    "banner_image"=>Hash::make($request->thumnail),
-    "genre"=>$request->genre,
-    "length"=>$request->length,
-    "rented_time"=>"0",
-    "trailer"=>$request->trailerLink,
-    "branch_id"=>$request->branch_id,
-    "type_id"=>$request->type
-  ]);
-  return response(["Result"=>"Success"],200);
+  Route::post("/product/add",function(Request $request){
+    if(!isset($request->api_token)) abort(404);
+    $staff=Staff::where("api_token",$request->api_token)->get();
+    if(isset($staff->api_token)){
+      Product::create([
+        "name"=>$request->name,
+        "author"=>$request->author,
+        'producer'=>$request->producer,
+        "banner_image"=>Hash::make($request->thumnail),
+        "genre"=>$request->genre,
+        "length"=>$request->length,
+        "rented_time"=>"0",
+        "trailer"=>$request->trailerLink,
+        "branch_id"=>$request->branch_id,
+        "type_id"=>$request->type
+      ]);
+      return response(["Result"=>"Success"],200);
+    }
+    return response(["message"=>"unautherised user"],401);
 });
+Route::get("/product/{id}",function($id){
+    $product = Prodct :: select("id","name","author","producer","genre","length","banner_image","rented_time")->where("id",$id)->get();
+});
+
 Route::post("/customer/login",function(Request $request){
       $Customer = Customer :: where('user_name',$request->userName)->first();
       if($Customer){
@@ -65,6 +74,13 @@ Route::post("/customer/login",function(Request $request){
         }
       }
       return response(["message"=>"password or username wrong"],401);
+});
+Route::post("/staff/logout",function(Request $request){
+  if(!isset($request->api_token)) abort(404);
+  $staff=Staff::where("api_token",$request->api_token)->get();
+  if(isset($staff->api_token)){
+
+  }
 });
 Route::post("/staff/login",function(Request $request){
       $Staff = Staff :: where('email',$request->email)->first();
