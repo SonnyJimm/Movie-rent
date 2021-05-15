@@ -9,8 +9,4 @@ class Type extends Model
 {
     use HasFactory;
     protected $table = "type";
-    public function typeable()
-    {
-        return $this->morphTo();
-    }
 }

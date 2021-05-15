@@ -20,4 +20,12 @@ class Product extends Model
     "trailer",
     "branch_id",
     "type_id"];
+    public function type()
+   {
+       return $this->belongsTo(Type::class,"type_id");
+   }
+   public function branch()
+  {
+      return $this->belongsTo(Branch::class,"branch_id");
+  }
 }

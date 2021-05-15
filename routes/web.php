@@ -1,7 +1,6 @@
 <?php
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,4 +13,25 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get("/","App\Http\Controllers\ProductController@allProducts");
+Route::get("","App\Http\Controllers\ProductController@allProducts");
+Route::get("product/add",function(){
+
+});
+Route::post("product/add","App\Http\Controllers\ProductController@addProduct")->middleware('auth:staff');;
+Route::get("product/{id}","App\Http\Controllers\ProductController@getProduct")->middleware('auth:customer');
+
+
+//user login stuff
+Route::get("login",function(){
+
+  return view("login",["title"=>"Login"]);
+});
+Route::post("login","App\Http\Controllers\CustomerController@login");
+
+Route::get("register",function(){
+
+});
+Route::get("logout","App\Http\Controllers\CustomerController@logout");
+
+//staff
+Route::post("staff/login","App\Http\Controllers\StaffController@login");
