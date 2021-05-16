@@ -22,9 +22,14 @@ Route::post("product/edit", "ProductController@editProduct")->middleware("auth:s
 
 //Orders
 
-Route::post("allOrder","OrderController@allOrder")->middleware("auth:staff");
+Route::get("allOrder","OrderController@allOrder")->middleware("auth:staff");
+
+Route::get("order/{$id}","OrderController@getOrder")->middleware("auth:staff");
+
 Route::post("approveOrder","OrderController@approveOrder")->middleware("auth:staff");
+
 Route::post("declineOrder","OrderController@declineOrder")->middleware("auth:staff");
+
 Route::post("extendOrder","OrderController@extendOrder")->middleware("auth:staff");
 Route::post("Order","OrderController@dOrder")->middleware("auth:customer");
 
