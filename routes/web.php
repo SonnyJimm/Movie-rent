@@ -24,7 +24,7 @@ Route::post("product/edit", "ProductController@editProduct")->middleware("auth:s
 
 Route::get("allOrder","OrderController@allOrder")->middleware("auth:staff");
 
-Route::get("order/{$id}","OrderController@getOrder")->middleware("auth:staff");
+Route::get("order/{id}","OrderController@getOrder")->middleware("auth:staff");
 
 Route::post("approveOrder","OrderController@approveOrder")->middleware("auth:staff");
 
