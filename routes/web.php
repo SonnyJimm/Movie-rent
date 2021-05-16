@@ -31,6 +31,8 @@ Route::post("approveOrder","OrderController@approveOrder")->middleware("auth:sta
 Route::post("declineOrder","OrderController@declineOrder")->middleware("auth:staff");
 
 Route::post("extendOrder","OrderController@extendOrder")->middleware("auth:staff");
+
+Route::post("expireOrder","OrderController@expireOrder")->middleware("auth:staff");
 Route::post("Order","OrderController@dOrder")->middleware("auth:customer");
 
 //user login stuff
