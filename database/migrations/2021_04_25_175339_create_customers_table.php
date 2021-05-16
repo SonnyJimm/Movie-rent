@@ -18,6 +18,7 @@ class CreateCustomersTable extends Migration
             $table->string("user_name")->unique();
             $table->string("password");
             $table->string("api_token",60)->nullable();
+            $table->boolean("verified")->defualt("false");
             $table->string("first_name");
             $table->string("last_name");
             $table->string("gender");

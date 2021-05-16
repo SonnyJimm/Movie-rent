@@ -13,5 +13,5 @@
 <p>{{$product->type->type}}</p>
 <p>{{$product->type->price}}</p>
 <p>{{$product->branch->branch_name}}</p>
-<p>{{$product->branch->branch_location}}</p> 
+<p>{{$product->branch->branch_location}}</p>
 @endsection("content")

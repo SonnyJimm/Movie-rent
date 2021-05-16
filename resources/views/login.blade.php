@@ -1,6 +1,6 @@
 @extends("master_page.master",['title'=>$title])
 @section("content")
-<form action="{{url("/login")}}" method="post">
+<form action="{{url(''.$route)}}" method="post">
 {{csrf_field()}}
   <div class="form-group">
     <label for="from">User Name</label>
